@@ -1,6 +1,5 @@
 import { readContacts } from '../utils/readContacts.js';
-import { PATH_DB } from '../constants/contacts.js';
-import * as fs from 'node:fs/promises';
+import { writeContacts } from '../utils/writeContacts.js';
 
 export const removeLastContact = async () => {
   try {
@@ -10,8 +9,8 @@ export const removeLastContact = async () => {
       return;
     }
     contacts.pop();
-    await fs.writeFile(PATH_DB, JSON.stringify(contacts, null, 2));
-    console.log('Last contact was removed');
+    await writeContacts(contacts);
+    console.log('Крайній контакт з кінця вилучено!');
   } catch (err) {
     console.log(err);
   }
